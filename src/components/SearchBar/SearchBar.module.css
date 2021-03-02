@@ -1,0 +1,19 @@
+.wrapper {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.textField {
+  width: 100%;
+}
+
+.icon {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}

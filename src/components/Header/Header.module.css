@@ -1,0 +1,14 @@
+.header {
+  height: 10vh;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: white;
+  font-size: 1.4em;
+  font-weight: 700;
+
+  background-color: blue;
+}
