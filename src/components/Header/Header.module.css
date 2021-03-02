@@ -12,9 +12,3 @@
 
   background-color: blue;
 }
-
-@media screen and (max-width: 768px) {
-  .header {
-    font-size: 2em;
-  }
-}
