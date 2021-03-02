@@ -1,36 +1,14 @@
 import { useEffect, useState } from "react";
+import useData from "./hooks/useData";
 import "./globalStyle.css";
 import Header from "./components/Header/Header";
 import SearchBar from "./components/SearchBar/SearchBar";
-
 import ContactsDispay from "./components/ContactsDisplay/ContactsDisplay";
 
-const contacts = [
-  {
-    id: 1,
-    first_name: "Jack",
-    last_name: "Wick",
-    email: "jack@wick.com",
-    gender: "Male",
-    avatar:
-      "https://www.flaticon.com/svg/vstatic/svg/622/622669.svg?token=exp=1614694504~hmac=18eb1c1a1323934f071120fe04f7e9ce",
-  },
-  {
-    id: 2,
-    first_name: "Tom",
-    last_name: "Wick",
-    email: "jack@wick.com",
-    gender: "Male",
-    avatar:
-      "https://www.flaticon.com/svg/vstatic/svg/622/622669.svg?token=exp=1614694504~hmac=18eb1c1a1323934f071120fe04f7e9ce",
-  },
-];
-
 const App = () => {
-  const [search, setSearch] = useState("hey");
+  const [search, setSearch] = useState("");
   const [selected, setSelected] = useState([]);
-
-  useEffect(() => {});
+  const contacts = useData();
 
   useEffect(() => {
     console.log(selected);
@@ -38,6 +16,20 @@ const App = () => {
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
+  };
+
+  const getFilteredContacts = () => {
+    if (typeof contacts === "string") {
+      return contacts;
+    }
+
+    if (contacts) {
+      return contacts.filter((contact) => {
+        let fullName = `${contact.first_name} ${contact.last_name}`.toLowerCase();
+
+        return fullName.includes(search.toLowerCase());
+      });
+    }
   };
 
   const handleContactClick = (e) => {
@@ -55,7 +47,7 @@ const App = () => {
       <Header>Contacts</Header>
       <SearchBar search={search} handleInputChange={handleInputChange} />
       <ContactsDispay
-        contacts={contacts}
+        contacts={getFilteredContacts()}
         handleContactClick={handleContactClick}
         selected={selected}
       />
